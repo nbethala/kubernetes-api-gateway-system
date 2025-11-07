@@ -3,13 +3,13 @@
 ### 🟢 Phase 0: Setup GitHub repo - Initialize with the needed files 
 
 ### 🟢 Phase 1: Foundation Setup
-[x] Install Docker, Kind, kubectl, helm on macOS Big Sur
+[x] Install Docker, Kind, kubectl, helm on local environment - macOS Big Sur ( My current OS).
 
-[x] Create Kind cluster with port mappings
+[x] Create Kind cluster with port mappings -config.yaml file
 
-[x] Install NGINX Ingress Controller
+[x] Install NGINX Ingress Controller - accepts external traffic and route it to internal services.
 
-[x] Deploy Kong Gateway via Helm
+[x] Deploy Kong Gateway via Helm - API Gateway functionality
 
 [x] Validate routing with dummy service (httpbin)
 
