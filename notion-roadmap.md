@@ -15,13 +15,13 @@
 
 
 ### 🟡 Phase 2: Microservices Scaffolding
-[ ] Scaffold user-service with FastAPI + Dockerfile
+[x] Scaffold user-service with FastAPI + Dockerfile
 
-[ ] Scaffold product-service and order-service
+[x] Scaffold product-service and order-service
 
-[ ] Add /health, /ready, /info endpoints to each
+[x] Add /health, /ready, /info endpoints to each
 
-[ ] Create Kubernetes Deployment + Service YAMLs
+[x] Create Kubernetes Deployment + Service YAMLs
 
 [ ] Validate pod status and service exposure
 

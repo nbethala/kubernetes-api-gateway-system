@@ -1,0 +1,35 @@
+#YAML- setup to run and expose a FastAPI-based microservice in Kubernetes. 
+#deployment and the service (App + network exposure) are kept together in the same yaml file
+
+# deployment yaml- user-service
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: user-service:latest
+        ports:
+        - containerPort: 8000
+---
+# service yaml for user-service
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 8000
