@@ -3,18 +3,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: httpbin
+  name: httpbin-nginx
+  namespace: default
   annotations:
-    konghq.com/strip-path: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  ingressClassName: kong
+  ingressClassName: nginx
   rules:
-  - http:
-      paths:
-      - path: /httpbin
-        pathType: Prefix
-        backend:
-          service:
-            name: httpbin
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /httpbin(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: httpbin
+                port:
+                  number: 80

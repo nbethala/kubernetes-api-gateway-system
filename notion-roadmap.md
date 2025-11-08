@@ -26,7 +26,7 @@
 [x] Validate pod status and service exposure
 
 ### 🟠 Phase 3: Gateway Routing
-[ ] Define Kong Ingress routes for each service
+[ ] Define Kong Ingress routes for each service - STart here 
 
 [ ] Test routing with curl and Postman
 

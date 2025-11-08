@@ -18,11 +18,23 @@ Dummy Service	✅ httpbin deployed	Routed via Kong using Ingress
     ```
     kind create cluster --name gateway-cluster --config k8s-manifests/kind-config.yaml
     ```
-1.3 Install NGINX Ingress Controller 
+1.3 Install NGINX Ingress Controller - two methods
 ```
+# Installation via static manifest yaml 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/kind/deploy.yaml
-```
 
+# Installation via helm - which will be consistent with kong and does port mapping 
+helm install nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx --create-namespace \
+  --set controller.service.type=NodePort \
+  --set controller.service.nodePorts.http=31080 \
+  --set controller.service.nodePorts.https=31443 \
+  --set controller.resources.requests.cpu=100m \
+  --set controller.resources.requests.memory=128Mi \
+  --set controller.affinity=null \
+  --set controller.nodeSelector=null
+
+```
 # check for controller pod to become ready
 kubectl get pods -n ingress-nginx --watch
 
@@ -56,18 +68,30 @@ kubectl get all -n kong
     ```
    # create kong ingress resource - gateway/httpbin-route.yaml
    ```
+   kubectl apply -f gateway/httpbin-deployment.yaml
+   kubectl apply -f gateway/httpbin-service.yaml
    kubectl apply -f gateway/httpbin-route.yaml
+   
    ```
 
    # Validate the route
    ```
-   curl http://localhost:9080/httpbin/get
-   
+   curl http://localhost:8082/httpbin/get
+   curl -i http://localhost:8082/httpbin/status/200
+   ```
+
+
+   # Validate the route via POSTMAN -Test httpbin via NGINX Ingress
+   ```
+    Target URL: http://localhost:8082/httpbin/status/200 
+    This hits NGINX → rewrites path → routes to httpbin → returns 200 OK.
+   ```
       
-   ###  What You've Achieved : 
+###  What You've Achieved : 
    - Bootstrapped a Kubernetes-native API Gateway system
    - Validated routing from Kong → Ingress → Service
    - Built a reusable foundation for microservices and observability
+
 
 ### Phase 2: Microservices Scaffolding
 2.1  setup services with FastAPI + Dockerfile
@@ -105,15 +129,16 @@ docker build -t user-service:latest services/user-service/
 docker build -t product-service:latest services/product-service/
 docker build -t order-service:latest services/order-service/
 
-#Load each image into kind
+# Load each image into kind
 kind load docker-image user-service:latest
 kind load docker-image product-service:latest
 kind load docker-image order-service:latest
 
-#restart the deployments (optional)
+# restart the deployments (optional)
 kubectl rollout restart deployment user-service
 kubectl rollout restart deployment product-service
 kubectl rollout restart deployment order-service
 ```
 
-
+### Phase 3: Gateway Routing
+3.1 Define Kong Ingress Routes

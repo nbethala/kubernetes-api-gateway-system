@@ -46,14 +46,20 @@ k8s-api-gateway-system/
 ├── gateway/                    # Kong Gateway config and routing
 │   ├── kong-ingress.yaml
 │   ├── httpbin-route.yaml
+│   ├── httpbin-deployment.yaml
+│   ├── httpbin-service.yaml
 │   └── README.md
 ├── services/                   # Microservices (FastAPI-based)
+│   │   └── README.md
 │   ├── user-service/
 │   │   ├── app.py
 │   │   ├── Dockerfile
-│   │   └── README.md
 │   ├── product-service/
+│   │   ├── app.py
+│   │   ├── Dockerfile
 │   └── order-service/
+│   │   ├── app.py
+│   │   ├── Dockerfile
 ├── k8s-manifests/             # All Kubernetes YAMLs
 │   ├── kind-config.yaml
 │   ├── ingress-nginx.yaml
