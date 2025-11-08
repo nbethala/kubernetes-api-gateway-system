@@ -20,7 +20,8 @@ Dummy Service	✅ httpbin deployed	Routed via Kong using Ingress
     ```
 1.3 Install NGINX Ingress Controller 
 ```
-https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/kind/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/kind/deploy.yaml
+```
 
 # check for controller pod to become ready
 kubectl get pods -n ingress-nginx --watch

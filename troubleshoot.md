@@ -51,3 +51,32 @@ curl http://localhost:9080/httpbin/get
 You should get a JSON response from the httpbin pod.
 
 
+### Rebuilding After Cluster Loss
+
+If the Kind cluster is deleted or crashes:
+
+1. Recreate the cluster:
+   ```bash
+   kind create cluster --config k8s-manifests/kind-config.yaml
+Reinstall Kong with valid NodePorts:
+
+bash
+helm install kong kong/kong \
+  --namespace kong --create-namespace \
+  --set proxy.type=NodePort \
+  --set proxy.http.nodePort=32080 \
+  --set proxy.tls.nodePort=32443 \
+  --set ingressController.installCRDs=false
+Apply all manifests:
+
+bash
+kubectl apply -f k8s-manifests/
+kubectl apply -f gateway/
+Validate routing:
+
+bash
+curl -i http://localhost:8081/httpbin/status/200
+
+Expected result: HTTP/1.1 200 OK
+
+### 

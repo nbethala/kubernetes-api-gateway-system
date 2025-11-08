@@ -23,7 +23,7 @@
 
 [x] Create Kubernetes Deployment + Service YAMLs
 
-[ ] Validate pod status and service exposure
+[x] Validate pod status and service exposure
 
 ### 🟠 Phase 3: Gateway Routing
 [ ] Define Kong Ingress routes for each service
