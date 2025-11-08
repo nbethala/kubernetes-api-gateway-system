@@ -61,9 +61,58 @@ kubectl get all -n kong
    # Validate the route
    ```
    curl http://localhost:9080/httpbin/get
-   ```
-
-   ###  What You’ve Achieved : 
+   
+      
+   ###  What You've Achieved : 
    - Bootstrapped a Kubernetes-native API Gateway system
    - Validated routing from Kong → Ingress → Service
    - Built a reusable foundation for microservices and observability
+
+### Phase 2: Microservices Scaffolding
+2.1  setup services with FastAPI + Dockerfile
+      - services/user-service/app.py
+      - services/order-service/app.py
+      - services/product-service/app.py
+      - services/user-service/Dockerfile
+      - services/order-service/Dockerfile
+      - services/product-service/Dockerfile
+
+2.2 Create Kubernetes Deployment + Service YAMLs (both will be in the same yaml file for ease of tracking and service)
+     - k8s-manifests/user-service.yaml
+     - k8s-manifests/order-service.yaml
+     - k8s-manifests/product-service.yaml
+
+2.3 Apply and Validate yaml files 
+```
+kubectl apply -f k8s-manifests/user-service.yaml
+kubectl apply -f k8s-manifests/product-service.yaml
+kubectl apply -f k8s-manifests/order-service.yaml
+
+kubectl get pods
+kubectl get svc
+```
+
+###  You should see all three services running and exposed internally.
+NOTE : You will see ImagePullBackOff and ErrImagePull errors because Kubernetes is unable to fetch the container image for your microservices.
+
+Reason - Kubernetes expects this image to exist in a registry or be preloaded into the Kind cluster. But by default, Kind can't pull from your local Docker daemon. Since this project is been built locally - lets load images locally into the kind cluster.
+
+✅ Fix: Load Local Images into Kind
+```
+# build image locally 
+docker build -t user-service:latest services/user-service/
+docker build -t product-service:latest services/product-service/
+docker build -t order-service:latest services/order-service/
+
+#Load each image into kind
+kind load docker-image user-service:latest
+kind load docker-image product-service:latest
+kind load docker-image order-service:latest
+
+#restart the deployments (optional)
+kubectl rollout restart deployment user-service
+kubectl rollout restart deployment product-service
+kubectl rollout restart deployment order-service
+```
+
+
