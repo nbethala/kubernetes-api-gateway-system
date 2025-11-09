@@ -1,9 +1,12 @@
 
-# Kubernetes API Gateway System
+# Kubernetes API Gateway Architecture 
 
-This project demonstrates a Kubernetes-native API Gateway architecture using Kong Gateway, NGINX Ingress, and FastAPI microservices. It’s designed for CKA prep in mind.
+This project demonstrates a Kubernetes-native API Gateway architecture using Kong Gateway, NGINX Ingress for quick local testing, and FastAPI microservices. 
 
 ## 🧱 Architecture Overview
+
+<img width="778" height="479" alt="API-architecture drawio (1)" src="https://github.com/user-attachments/assets/196de481-4d61-4212-8d26-3a0a2bf47299" />
+
 
 - **Kind** cluster with multi-node setup
 - **NGINX Ingress Controller** for external traffic
@@ -33,12 +36,10 @@ This project demonstrates a Kubernetes-native API Gateway architecture using Kon
 - Understand API Gateway patterns
 - Practice Kubernetes YAML and CLI
 - Simulate service-to-service communication
-- Build a portfolio-ready architecture
 
 ## 📎 Resources
 
 - [Kong Gateway Docs](https://docs.konghq.com/)
-- [CKA Curriculum](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 
 ## Folder Structure
 ```
