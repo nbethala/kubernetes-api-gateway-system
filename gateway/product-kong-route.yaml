@@ -1,0 +1,20 @@
+# Kong route setup for product - microservice
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: product-kong
+  namespace: default
+  annotations:
+    konghq.com/strip-path: "true"
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+          - path: /product(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: product
+                port:
+                  number: 80

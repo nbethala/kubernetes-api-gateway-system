@@ -141,4 +141,17 @@ kubectl rollout restart deployment order-service
 ```
 
 ### Phase 3: Gateway Routing
-3.1 Define Kong Ingress Routes
+3.1 Define Kong Ingress Routes for Microservices
+
+ # setup yaml files 
+  gateway/user-kong-route.yaml
+  gateway/product-kong-route.yaml
+  gateway/order-kong-route.yaml
+```
+kubectl apply -f gateway/user-kong-route.yaml
+kubectl apply -f gateway/product-kong-route.yaml
+kubectl apply -f gateway/order-kong-route.yaml
+```
+
+3.2 Test routing with curl and Postman 
+#validate that Kong is correctly forwarding external requests to internal services.

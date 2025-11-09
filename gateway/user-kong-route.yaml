@@ -1,0 +1,20 @@
+# Kong ingress route for user- microservice
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-kong
+  namespace: default
+  annotations:
+    konghq.com/strip-path: "true"
+spec:
+  ingressClassName: kong
+  rules:
+    - http:
+        paths:
+          - path: /user(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: user
+                port:
+                  number: 80

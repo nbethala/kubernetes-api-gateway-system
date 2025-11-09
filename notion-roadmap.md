@@ -1,11 +1,13 @@
 ## 🧭 Notion Roadmap: k8s-api-gateway-system
 
-### 🟢 Phase 0: Setup GitHub repo - Initialize with the needed files 
+### 🟢 Phase 0: Setup GitHub Repo 
+      - Initialize the needed files -Readme
+      - setup repo
 
 ### 🟢 Phase 1: Foundation Setup
 [x] Install Docker, Kind, kubectl, helm on local environment - macOS Big Sur ( My current OS).
 
-[x] Create Kind cluster with port mappings -config.yaml file
+[x] Create Kind cluster with port mappings -kind-config.yaml file
 
 [x] Install NGINX Ingress Controller - accepts external traffic and route it to internal services.
 
@@ -26,13 +28,13 @@
 [x] Validate pod status and service exposure
 
 ### 🟠 Phase 3: Gateway Routing
-[ ] Define Kong Ingress routes for each service - STart here 
+[x] Define Kong Ingress routes for each service - setup yaml files in gateway
 
-[ ] Test routing with curl and Postman
+[x] validate - Test routing with curl and Postman
 
-[ ] Add Kong plugins (rate limiting, logging, optional JWT auth)
+[ ] Add Kong plugins (rate limiting, logging, optional JWT auth) (Optional)
 
-[ ] Document routing logic in gateway/README.md
+[x] Document routing logic in gateway/README.md
 
 ### 🔵 Phase 4: Observability (Optional)
 [ ] Install Prometheus + Grafana via Helm
@@ -43,7 +45,7 @@
 
 [ ] Document metrics setup in observability/README.md
 
-### 🟣 Phase 5: CI/CD Integration
+### 🟣 Phase 5: CI/CD Integration( Optional)
 [ ] Create GitHub Actions workflow for Docker builds
 
 [ ] Push images to GitHub Container Registry (GHCR)
@@ -61,7 +63,7 @@
 
 [ ] Document cloud setup tradeoffs
 
-### 🧾 Phase 7: Portfolio Polish
+### 🧾 Phase 7: Portfolio Polish (Optional)
 [ ] Finalize README.md with architecture diagram
 
 [ ] Add CLI examples and YAML snippets
