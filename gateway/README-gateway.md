@@ -2,7 +2,20 @@
 
 Diagram showing how everything connects inside your Kind cluster.
 
-##  Nginx Ingress routing 
+##  Nginx Ingress routing  
+
+[ Postman / curl ]
+        |
+        +--------------------+
+        |                    |
+localhost:8082         localhost:8080
+(NGINX Ingress)        (Kong Gateway)
+        |                    |
+        v                    v
+   /user → user svc     /user → user svc
+   /product → product   /product → product
+   /order → order       /order → order
+
 
 <Diagram>
 
@@ -19,7 +32,27 @@ This image illustrates:
 🧩 All components aligned inside the Kind cluster
 
 
-## Kong Gateway Routing 
+## Kong Gateway Routing - advanced API management and cloud-native integration.
+
+[ Postman / curl ]
+        |
+        v
+http://localhost:8080/user
+        |
+        v
++---------------------+
+|    Kong Gateway     |  (IngressClass: kong)
++---------------------+
+        |
+        v
++---------------------+
+|   user-service.yaml |
+|   (ClusterIP: user) |
++---------------------+
+        |
+        v
+[ user pod responds ]
+
 
 Kong Gateway fully exposed and routing traffic to your microservices inside the Kind cluster.
 

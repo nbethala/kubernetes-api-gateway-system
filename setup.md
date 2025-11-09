@@ -153,5 +153,11 @@ kubectl apply -f gateway/product-kong-route.yaml
 kubectl apply -f gateway/order-kong-route.yaml
 ```
 
-3.2 Test routing with curl and Postman 
+3.2 Test routing with curl and Postman for Microservices
 #validate that Kong is correctly forwarding external requests to internal services.
+
+```
+curl -i http://localhost:8080/user
+curl -i http://localhost:8080/product
+curl -i http://localhost:8080/order
+```
